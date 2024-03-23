@@ -24,7 +24,7 @@
 
 ## 使用 ssh 登入樹莓派
 
-因為目前我的樹莓派沒有外面營幕跟鍵盤，因此只能透過 ssh 登入樹莓派操作。
+因為目前我的樹莓派沒有外接營幕跟鍵盤，因此只能透過 ssh 登入樹莓派操作。
 
 - 要先知道樹莓派的 ip ，才能連上樹莓派：
   - 手機下載 `Net Analyzer` app，手機、電腦與樹莓派設定相同網域。
@@ -33,7 +33,7 @@
 - 在電腦的任何命令列(cmd/ powershell/ Gitbash)上執行：`ssh pi@192.168.1.118`即可登入樹莓派。
   - 因為全新樹莓派預設系統 ssh 是關閉的，所以當第一次 ssh 時，會出現此錯誤訊息，無法連上：`ssh:connect to host 192,168.1.118 port:22 Connection refused`
   - 解決辦法是在SD Card根目錄新增一個`ssh`的空白文件就行了
-  - 或是如果有營幕鍵盤，可以直接下命令直接開啟：
+  - 或是如果有接營幕鍵盤，可以直接下命令直接開啟：
   
     ```linux
     sudo service ssh start
@@ -46,3 +46,16 @@
 
 - `sudo raspi-config`
 - Interface options -> VNC
+
+## 在樹莓派上架設網站
+
+參考此篇教學文章 [How to Host a WordPress Site on Raspberry Pi](https://www.makeuseof.com/tag/host-wordpress-raspberry-pi/)
+
+### 安裝 Apache Web Server
+
+- `sudo apt install apache2 -y`：安裝Apache
+- `hostname -I`：取得樹莓派 IP 位址
+- 在另一台電腦開啟網頁，連上此網址測試：
+  `http://192.168.1.118`
+
+### 安裝 PHP
