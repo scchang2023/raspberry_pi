@@ -51,11 +51,37 @@
 
 參考此篇教學文章 [How to Host a WordPress Site on Raspberry Pi](https://www.makeuseof.com/tag/host-wordpress-raspberry-pi/)
 
+### 安裝前的前置動作
+
+- `sudo apt update`：apt->Advanced Package Tool 的縮寫，用於管理軟體包的命令工具。update-> apt 的子命令，更新軟體包列表，使系統了解到目前可用的最新軟體包。
+- `sudo apt upgrade`：升級系統已安裝的軟體包到最新版本。
+- `sudo apt autoremove`：清除系統中已經不需要的軟體包。
+
 ### 安裝 Apache Web Server
 
-- `sudo apt install apache2 -y`：安裝Apache
+- `sudo apt install apache2 -y`：安裝 Apache
 - `hostname -I`：取得樹莓派 IP 位址
-- 在另一台電腦開啟網頁，連上此網址測試：
-  `http://192.168.1.118`
+- 在另一台電腦開啟網頁，輸入樹莓派機台網址： `http://192.168.1.118`，確認是否有安裝成功。
 
 ### 安裝 PHP
+
+- `sudo apt install php -y`：安裝 PHP
+- 完成安裝時，確認PHP是否有安裝成功
+  - `cd /var/www/html/`
+  - `sudo rm index.html`：刪除之前的 web page
+  - `sudo nano index.php`
+  - 寫入以下內容：
+
+  ```php
+  <?php echo "hello world"; ?>
+  <?php echo date('Y-m-d H:i:s'); ?>
+  <?php phpinfo(); ?>
+  ```
+
+  - 重新啟啟動 Apache：`sudo service apache2 restart`
+  - 更新網頁看結果
+
+### 安裝 mariadb
+
+- `sudo apt install mariadb-server php-mysql -y`：安裝 mariadb
+- `sudo service apache2 restart`：重新啟動 apache
