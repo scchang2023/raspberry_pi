@@ -85,3 +85,46 @@
 
 - `sudo apt install mariadb-server php-mysql -y`：安裝 mariadb
 - `sudo service apache2 restart`：重新啟動 apache
+
+### 安裝 wordpress
+
+- 進入到html資料夾，並移除所有的檔案：
+
+  ```linux
+  cd /var/www/html
+  sudo rm *
+  ```
+
+- 下載最新版 wordpress：`sudo wget http://wordpress.org/latest.tar.gz`
+- 解壓縮：`sudo tar xzf latest.tar.gz`
+- 將 wordpress 資料夾內的內容全移到 html 底下：`sudo mv wordpress/* .`
+- 移除 wordpress 資料夾及 latest.tar.gz：`sudo rm -rf wordpress latest.tar.gz`
+- 設定 Apache 的 user 權限：`sudo chown -R www-data: .`，chown是change owner的意思，www-data 通常是Web伺服器（如ApacheNginx）在執行時的默認使用者和群組。
+
+### Configure MySQL
+
+執行 install command ： `sudo mysql_secure_installation`，並選擇以下選項：
+```
+Remove anonymous users
+Disallow root login remotely
+Remove test database and access to it
+Reload privilege tables now
+```
+
+### 建立 wordpress database
+
+- 先 configure database 以進入 mariadb monitor：`sudo mysql -uroot -p`
+- 在 mariadb monitor 命令列中，輸入 `create database wordpress;`，建立 wordpress database
+- `GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'localhost' IDENTIFIED BY 'PASSWORD';`
+- `FLUSH PRIVILEGES;`
+- 按 `Ctrl+D` 離開 mariadb database magement
+
+### Install and Configure WordPress
+
+開啟劉灠器，並輸入`http://192.168.1.118/`，開始 wordpress 的安裝頁面。
+```
+資料庫名稱：wordpress
+使用者名稱：root
+密碼：PASSWORD
+其它不用動
+```
