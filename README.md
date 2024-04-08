@@ -128,3 +128,25 @@ Reload privilege tables now
 密碼：PASSWORD
 其它不用動
 ```
+
+## 樹莓派常用指令
+
+- 關機
+
+``` linux
+sudo shutdown -h now
+或
+sudo halt
+或
+sudo poweroff
+或
+sudo init 0
+```
+
+- 重新開機
+
+```linux
+sudo reboot
+或
+shutdown -r now
+```
